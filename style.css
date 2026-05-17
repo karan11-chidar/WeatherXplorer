@@ -1,0 +1,353 @@
+ 
+        /* CSS RESET & VARIABLES */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --accent-color: #38bdf8;
+            --input-focus: #38bdf8;
+            
+            /* Suggestion Mood Colors */
+            --suggest-clear-bg: rgba(234, 179, 8, 0.1);
+            --suggest-clear-border: rgba(234, 179, 8, 0.3);
+            --suggest-clear-text: #facc15;
+        }
+
+        body {
+            background: var(--bg-gradient);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-primary);
+            padding: 2vw; /* Uses fluid viewport width padding */
+        }
+
+        /* MASTER DASHBOARD CONTAINER - PURE AUTO-FIT GRID */
+        .dashboard-container {
+            width: 100%;
+            max-width: 1100px;
+            background: rgba(255, 255, 255, 0.01);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 2.5rem;
+            display: grid;
+            /* Auto-fit smoothly handles layout switching from columns to rows based on available space */
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        /* SEARCH CONTAINER - STRETCHES FULL GRID WIDTH ALWAYS */
+        .search-control-wrapper {
+            grid-column: 1 / -1;
+            display: flex;
+            flex-wrap: wrap; /* Allows children elements to wrap on ultra small devices */
+            gap: 12px;
+            background: rgba(0, 0, 0, 0.15);
+            padding: 12px;
+            border-radius: 16px;
+            border: 1px solid var(--glass-border);
+        }
+
+        .search-input-box {
+            position: relative;
+            flex: 1 1 250px; /* Fluid flex scaling base */
+        }
+
+        .search-input-box input {
+            width: 100%;
+            padding: 14px 16px 14px 42px;
+            background: rgba(0, 0, 0, 0.25);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .search-input-box input:focus {
+            border-color: var(--input-focus);
+            background: rgba(0, 0, 0, 0.35);
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.15);
+        }
+
+        .search-input-box .geo-icon {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-secondary);
+            pointer-events: none;
+        }
+
+        .action-btn {
+            padding: 14px 28px;
+            background: var(--accent-color);
+            border: none;
+            border-radius: 12px;
+            color: #0f172a;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            flex: 1 1 auto; /* Extends to full row space if screen collapses */
+            text-align: center;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(56, 189, 248, 0.35);
+        }
+
+        .gps-btn {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            color: var(--text-primary);
+            padding: 14px;
+            border-radius: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            flex: 0 0 auto;
+        }
+
+        @media screen and (max-width: 480px) {
+            .gps-btn {
+                flex: 1 1 100%; /* Spans full width on micro-screens */
+            }
+        }
+
+        .gps-btn:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--accent-color);
+        }
+
+        /* LEFT SIDE CONTENT - INDEPENDENT FLEX BLOCK */
+        .main-card {
+            background: linear-gradient(180deg, rgba(56, 189, 248, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            text-align: center;
+            width: 100%;
+        }
+
+        .location-box h2 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .location-box p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .weather-visual {
+            margin: 1.5rem 0;
+            position: relative;
+            width: 100%;
+        }
+
+        .weather-icon-cloud {
+            width: 80px;
+            height: 80px;
+            background: var(--accent-color);
+            border-radius: 50px;
+            filter: blur(15px);
+            opacity: 0.2;
+            position: absolute;
+            top: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+       #newCloud-icon {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    position: relative;
+    z-index: 100;
+    display: block;
+    margin: 0 auto;
+}
+
+        .temp-box h1 {
+            font-size: 4.5rem;
+            font-weight: 300;
+            line-height: 1;
+            margin-top: 10px;
+        }
+
+        .temp-box h1 span {
+            font-size: 2rem;
+            vertical-align: super;
+        }
+
+        .condition-text {
+            font-size: 1.2rem;
+            color: var(--accent-color);
+            margin-top: 10px;
+            font-weight: 500;
+        }
+
+        /* ELITE SUGGESTION ZONE */
+        .suggestion-zone {
+            width: 100%;
+            background: var(--suggest-clear-bg);
+            border: 1px solid var(--suggest-clear-border);
+            border-radius: 14px;
+            padding: 15px;
+            margin-top: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-align: left;
+            animation: softPulse 3s infinite ease-in-out;
+        }
+
+        .suggestion-icon {
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .suggestion-text h4 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--suggest-clear-text);
+            margin-bottom: 2px;
+        }
+
+        .suggestion-text p {
+            font-size: 0.8rem;
+            color: var(--text-primary);
+            opacity: 0.85;
+            line-height: 1.3;
+        }
+
+        /* RIGHT SIDE CONTENT - METRICS COMPLEX */
+        .details-wrapper {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 2rem;
+            width: 100%;
+        }
+
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        /* HIGHLIGHTS GRID SYSTEM */
+        .highlights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1.2rem;
+        }
+
+        .metric-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 1.5rem 1.2rem;
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .metric-label {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            margin-bottom: 8px;
+        }
+
+        .metric-value {
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+
+        /* FORECAST COMPONENT SLIDE CONTROLS */
+        .forecast-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            overflow-x: auto; /* Handles horizontal overflow smoothly on micro resolutions */
+            padding-bottom: 8px;
+            scroll-behavior: smooth;
+        }
+
+        /* Scrollbar customization for elite aesthetics */
+        .forecast-row::-webkit-scrollbar {
+            height: 4px;
+        }
+        .forecast-row::-webkit-scrollbar-thumb {
+            background: var(--glass-border);
+            border-radius: 10px;
+        }
+
+        .forecast-card {
+            flex: 1 1 80px; /* Fluid flexing behavior */
+            min-width: 75px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 15px 10px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .forecast-time {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .forecast-temp {
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        /* ANIMATIONS */
+        @keyframes softPulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 0px rgba(234, 179, 8, 0); }
+            50% { transform: scale(1.01); box-shadow: 0 4px 20px rgba(234, 179, 8, 0.15); }
+        }
+
+        /* SYSTEM MICRO OVERRIDES */
+        @media screen and (max-width: 400px) {
+            .dashboard-container {
+                padding: 1.2rem;
+                border-radius: 16px;
+            }
+            .temp-box h1 {
+                font-size: 3.5rem;
+            }
+        }
